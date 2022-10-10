@@ -47,11 +47,11 @@ You should have AMASS files and BABEL annotations in two seperate repository fol
             |--- SSM
 ```
 
-Then you can preprocess the data by running the following command and it will create files from the root directories <mocap_dir>
+Then you can preprocess the data by running the following command; and it will create files from the root directories <mocap_dir>
 ```
-babel_dir='/gfs-ssd/project/humans/BABEL/babel_v1.0_release'
-amass_dir='/gfs-ssd/project/humans/amass'
-mocap_dir='/scratch/1/user/fbaradel/posegpt/preprocessed_data'
+babel_dir='[link_to_babel_dir]'
+amass_dir='[link_to_amass_dir]'
+mocap_dir='[link_to_preprocessed_data_dir]'
 list_split=( 'train' 'test' 'val' )
 list_type=( 'smplx' 'smplh' )
 for split in "${list_split[@]}"
@@ -75,6 +75,7 @@ Once the preprocessing is done you should have a data structure such that:
                                                                     |--- pose.pkl
                                                                     |--- action.pt
 ```
+Finally, create simlinks named './babel', './amass', './preprocessed_data' at the root of the git folder (alternatively you can modify the default path arguments in babel.py)
 
 
 ## Train a transformer based classifier using smpl parameters as input:
@@ -115,16 +116,16 @@ python3 train_gpt.py  --name generator --n_codebook 2 --n_e 512 --e_dim 256  --v
 python3 train_gpt.py  --name generator --n_codebook 2 --n_e 512 --e_dim 256  --vq_model CausalVQVAE --hid_dim 384 --dropout 0  --vq_ckpt ./logs/auto_encoder_debug/checkpoints/best_val.pt --model poseGPT --n_visu_to_save 2 --class_conditional 1 --gpt_blocksize 512 --gpt_nlayer 8 --gpt_nhead 4 --gpt_embd_pdrop 0.2 --gpt_resid_pdrop 0.2 --gpt_attn_pdrop 0.2 --seq_len 64 --gen_eos 0 --eval_fid 0 --eos_force 1 --seqlen_conditional 1 --embed_every_step 1 --concat_emb 1 --dummy_data 1 --debug 1
 ```
 
-## Demo
-You can download our pretrained checkpoint here if you do not want to train the model by yourself.
+## Demo [Coming soon]
+You will soon be able to download our pretrained checkpoint here, if you do not want to train the model by yourself.
 ```
-wget <todo-with-cns>
+wget <todo>
 ```
 
-And finally launch the demo
-```
-python3 demo.py --ckpt <todo> # TODO add a demo.py that allows sampling and evaluation from a pretrained checkpoint
-```
+<!--And finally launch the demo-->
+<!--```-->
+<!--python3 demo.py --ckpt <todo> # TODO add a demo.py that allows sampling and evaluation from a pretrained checkpoint-->
+<!--```-->
 
 ## Citation
 
